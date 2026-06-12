@@ -4,6 +4,7 @@ import com.duoc.inventarios.dto.InventarioDTO;
 import com.duoc.inventarios.dto.InventariosRequest;
 import com.duoc.inventarios.service.InventariosService;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 // Controlador REST — expone los endpoints del dominio Inventario
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/inventarios")
 public class inventariosController {
@@ -21,8 +23,8 @@ public class inventariosController {
 
     // POST /api/v1/inventarios — crea un nuevo registro de inventario
     @PostMapping
-    public ResponseEntity<InventarioDTO> guardarInventario(
-            @Valid @RequestBody InventariosRequest request) {
+    public ResponseEntity<InventarioDTO> guardarInventario(@Valid @RequestBody InventariosRequest request) {
+        log.info("El request para crear un inventario fue: " + request);
         return new ResponseEntity<>(inventariosService.crearInventario(request), HttpStatus.CREATED);
     }
 
