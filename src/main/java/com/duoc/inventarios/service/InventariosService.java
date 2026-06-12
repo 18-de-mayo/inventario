@@ -7,6 +7,7 @@ import com.duoc.inventarios.exception.InventarioNotFoundException;
 import com.duoc.inventarios.exception.ProductoNotFoundException;
 import com.duoc.inventarios.model.Inventarios;
 import com.duoc.inventarios.repository.InventariosRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 // Capa de servicio — lógica de negocio del dominio Inventario
+@Slf4j
 @Service
 public class InventariosService {
 
@@ -35,6 +37,7 @@ public class InventariosService {
         inventario.setStockMinimo(request.getStockMinimo());
         inventario.setFechaActualizacion(request.getFechaActualizacion());
 
+        log.info("Inventarion creado correctamente: " + inventario);
         return convertirADTO(inventariosRepository.save(inventario));
     }
 
